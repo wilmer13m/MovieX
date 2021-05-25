@@ -31,6 +31,8 @@ struct ContentView: View {
             Button(action: addItem) {
                 Label("Add Item", systemImage: "plus")
             }
+        }.onAppear {
+            print(infoForKey("API Key"))
         }
     }
 
@@ -73,6 +75,10 @@ private let itemFormatter: DateFormatter = {
     return formatter
 }()
 
+func infoForKey(_ key: String) -> String? {
+        return (Bundle.main.infoDictionary?[key] as? String)?
+            .replacingOccurrences(of: "\\", with: "")
+ }
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
