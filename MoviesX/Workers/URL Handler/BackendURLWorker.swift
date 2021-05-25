@@ -27,6 +27,16 @@ class BackendURLWorker {
     
     // MARK: Subdomain for now playing movies endpoint
     private let nowPlayingMoviesSubDomain = "3/movie/now_playing"
+    
+    // MARK: Subdomain for movie credits endpoint
+    private let creditsMovie = "3/movie/%@/credits"
+    
+    // MARK: Subdomain for movie images endpoint
+    private let movieImages = "%@/images"
+
+    // MARK: Subdomain for people detail endpoint
+    private let personDetail = "3/person/%@"
+
 
     //MARK: get API URL
     private func getVariableFromPlist(variableName: String) -> String {
@@ -53,8 +63,29 @@ class BackendURLWorker {
         return getVariableFromPlist(variableName: apiUrlVariableName) + upcomingMoviesSubDomain
     }
     
-    // MARK: Gets the full endpoint for go login
+    // MARK: Gets the full endpoint for now playing movies
     func getNowPlayingMoviesURL() -> String {
         return getVariableFromPlist(variableName: apiUrlVariableName) + nowPlayingMoviesSubDomain
+    }
+    
+    // MARK: Gets the full endpoint for movie credits
+    func getMovieCreditsURL(movieId: String) -> String {
+        return getVariableFromPlist(variableName: apiUrlVariableName) + String(format:
+                                                                                creditsMovie,
+                                                                            "\(movieId)")
+    }
+    
+    // MARK: Gets the full endpoint for movie images
+    func getMovieImagesURL(movieId: String) -> String {
+        return getVariableFromPlist(variableName: apiUrlVariableName) + String(format:
+                                                                                movieImages,
+                                                                            "\(movieId)")
+    }
+    
+    // MARK: Gets the full endpoint for person detail
+    func getPersonDetailURL(personId: String) -> String {
+        return getVariableFromPlist(variableName: apiUrlVariableName) + String(format:
+                                                                                personDetail,
+                                                                            "\(personId)")
     }
 }

@@ -10,4 +10,5 @@
 
 IS_APP_NAME = MoviesX Release
 API_MAIN_URL = https:\/\/api.themoviedb.org/
+API_IMAGES_URL = https:\/\/image.tmdb.org/t/p/w500/
 API_KEY = 0b40adb01dd048c552b8ea1b350dd3bd

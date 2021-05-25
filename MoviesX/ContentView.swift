@@ -16,6 +16,8 @@ struct ContentView: View {
         animation: .default)
     private var items: FetchedResults<Item>
 
+    let popular = PersonDetailWorker()
+    
     var body: some View {
         List {
             ForEach(items) { item in
@@ -32,7 +34,9 @@ struct ContentView: View {
                 Label("Add Item", systemImage: "plus")
             }
         }.onAppear {
-            print(infoForKey("API Key"))
+            popular.getPersonDetail(personId: 819) { (success, personDetail) in
+                print(personDetail)
+            }
         }
     }
 

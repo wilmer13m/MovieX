@@ -12,9 +12,6 @@ class SetupRequestWorker {
 
     struct HeadersContentConfig {
         var contentType: String = "json"
-        var xApiKey: String?
-        var xFullMap: String = "false"
-        var xLanguageCode: String?
     }
 
     func setupRequest(headerConfig: HeadersContentConfig,
@@ -26,15 +23,8 @@ class SetupRequestWorker {
                       useApiKey: Bool = true) -> URLRequest {
 
         //Setup headers to use in the request
-        var headers = ["Content-Type": "application/\(headerConfig.contentType)"]
+        let headers = ["Content-Type": "application/\(headerConfig.contentType)"]
 
-        if let languageCode = Locale.current.languageCode {
-            headers["x-language-code"] = languageCode != "en" ? "es" : languageCode
-        }
-        
-        if let apiKey = headerConfig.xApiKey {
-            headers["x-api-key"] = apiKey
-        }
         var postData: Data!
 
         if jsonParameters == nil {
@@ -64,10 +54,6 @@ class SetupRequestWorker {
         var headers = [
             "content-type": "application/json"]
 
-        if sesion != nil {
-            headers["x-api-key"] = sesion
-        }
-
         if let languageCode = Locale.current.languageCode {
             headers["x-language-code"] = languageCode != "en" ? "es" : languageCode
         }
@@ -89,17 +75,7 @@ class SetupRequestWorker {
                               useApiKey: Bool = false) -> URLRequest {
         
         //Setup headers to use in the request
-        var headers = ["Content-Type": "application/\(headerConfig.contentType)"]
-
-        headers["x-language-code"] = headerConfig.xLanguageCode
-
-        if useApiKey, let apiKey = headerConfig.xApiKey {
-            headers["x-api-key"] = apiKey
-        }
-        
-        if let languageCode = Locale.current.languageCode {
-            headers["x-language-code"] = languageCode != "en" ? "es" : languageCode
-        }
+        let headers = ["Content-Type": "application/\(headerConfig.contentType)"]
         
         var postData: Data!
 
