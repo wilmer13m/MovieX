@@ -15,7 +15,8 @@ struct HomeView: View {
         
         VStack {
             TabView(selection: $selection) {
-                Text("Popular")
+               MovieMinitureView()
+                .frame(width: 200, height: 300)
                     .tag(0)
                 Text("Top Rated")
                     .tag(1)
