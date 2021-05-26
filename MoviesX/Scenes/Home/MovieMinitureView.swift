@@ -10,6 +10,14 @@ import Kingfisher
 
 struct MovieMinitureView: View {
     
+    private let baseImageUrl = BackendURLWorker().getBaseImageUrl()
+    
+    let movie: MoviesResponse.Movie
+    
+    init(with movie: MoviesResponse.Movie) {
+        self.movie = movie
+    }
+    
     var body: some View {
         
         ZStack {
@@ -23,15 +31,22 @@ struct MovieMinitureView: View {
                 VStack(alignment: .leading, spacing: 11) {
                    
                     //Cover image
-                    KFImage(URL(string: "http://image.tmdb.org/t/p/w500//7gbmM2NWcqZONbp65HUWDf4wr0Q.jpg"))
+                    KFImage(URL(string: "\(baseImageUrl)\(movie.posterPath ?? "")"))
                         .placeholder {
-                            Image(systemName: "heart.fill")
-                            
+                            Image(systemName: "photo.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .clipped()
+
                         }
+                        .resizable()
+                        .clipped()
                         .frame(width: geometry.size.width, height: geometry.size.height * 0.6)
+                        .aspectRatio(contentMode: .fit)
+                    
                     
                     //title
-                    Text("Who killed Sara?")
+                    Text(movie.title ?? "N/A")
                         .font(.system(size: 13, weight: .bold, design: .default))
                         .foregroundColor(Color("algaeGreen"))
                         .padding(.leading, 8)
@@ -39,7 +54,7 @@ struct MovieMinitureView: View {
                     
                     //Date and rating
                     HStack {
-                        Text("Date")
+                        Text(movie.releaseDate ?? "N/A")
                             .font(.system(size: 10, weight: .semibold, design: .default))
                             .foregroundColor(Color("algaeGreen"))
                             .padding(.leading, 8)
@@ -52,7 +67,7 @@ struct MovieMinitureView: View {
                                 .foregroundColor(Color("algaeGreen"))
                                 .frame(width: 8, height: 9)
                             
-                            Text("rating")
+                            Text("\(movie.voteAverage ?? 0.0)")
                                 .font(.system(size: 10, weight: .semibold, design: .default))
                                 .foregroundColor(Color("algaeGreen"))
                         }
@@ -61,7 +76,7 @@ struct MovieMinitureView: View {
                     }
                     
                     //Over view
-                    Text("pequeño resumen...pequeño resumen...pequeño resumen...pequeño resumen...pequeño resumen...pequeño resumen...")
+                    Text(movie.overview ?? "N/A")
                         .lineLimit(4)
                         .font(.system(size: 10))
                         .foregroundColor(.white)
@@ -76,7 +91,7 @@ struct MovieMinitureView: View {
 
 struct MovieMinitureView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieMinitureView()
+        MovieMinitureView(with: movieDebug)
             .previewLayout(.fixed(width: 150, height: 280))
         
     }

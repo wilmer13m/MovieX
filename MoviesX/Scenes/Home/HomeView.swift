@@ -10,11 +10,9 @@ import SwiftUI
 struct HomeView: View {
     
     @State private var selection = 0
+    @StateObject private var homeViewModel = HomeViewModel()
     
-    private var symbols = ["keyboard", "hifispeaker.fill", "printer.fill", "tv.fill", "desktopcomputer", "headphones", "tv.music.note", "mic", "plus.bubble", "video"]
     private var gridItemLayout = Array(repeating: GridItem(.flexible(), spacing: 0), count: 2)
-    private var colors: [Color] = [.yellow, .purple, .green]
-
     
     var body: some View {
         
@@ -24,14 +22,19 @@ struct HomeView: View {
                 
                 TabView(selection: $selection) {
                     
+                    //Grid POPULAR
                     ScrollView {
                         LazyVGrid(columns: gridItemLayout, spacing: 8) {
                             // Display the item
-                            ForEach(symbols, id: \.self) { travel in
-                                MovieMinitureView()
+                            ForEach(homeViewModel.popularMovies, id: \.id) { movie in
+                                MovieMinitureView(with: movie)
                                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300)
                                     .padding(.horizontal, 4)
                             }
+                            Rectangle()
+                                .onAppear(perform: {
+                                    print("llegue al final...")
+                                })
                         }
                         .padding(.top, 10)
                         .padding(.horizontal, 10)
@@ -39,27 +42,111 @@ struct HomeView: View {
                     }
                     .padding(.bottom, 139)
                     .tag(0)
+                    .background(Color("black1"))
                     
-                    Text("Top Rated")
-                        .tag(1)
-                    Text("Upcoming")
-                        .tag(2)
-                    Text("Now Playing")
-                        .tag(3)
+                    //Grid TopRated
+                    ScrollView {
+                        LazyVGrid(columns: gridItemLayout, spacing: 8) {
+                            // Display the item
+                            ForEach(homeViewModel.topRatedMovies, id: \.id) { movie in
+                                MovieMinitureView(with: movie)
+                                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300)
+                                    .padding(.horizontal, 4)
+                            }
+                            Rectangle()
+                                .onAppear(perform: {
+                                    print("llegue al final...")
+                                })
+                        }
+                        .padding(.top, 10)
+                        .padding(.horizontal, 10)
+                        .background(Color("black1"))
+                    }
+                    .padding(.bottom, 139)
+                    .tag(1)
+                    .background(Color("black1"))
+
+                    //Grid Upcoming
+                    ScrollView {
+                        LazyVGrid(columns: gridItemLayout, spacing: 8) {
+                            // Display the item
+                            ForEach(homeViewModel.upcomingMovies, id: \.id) { movie in
+                                MovieMinitureView(with: movie)
+                                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300)
+                                    .padding(.horizontal, 4)
+                            }
+                            Rectangle()
+                                .onAppear(perform: {
+                                    print("llegue al final...")
+                                })
+                        }
+                        .padding(.top, 10)
+                        .padding(.horizontal, 10)
+                        .background(Color("black1"))
+                    }
+                    .padding(.bottom, 139)
+                    .tag(2)
+                    .background(Color("black1"))
+                   
+                    //Grid TopRated
+                    ScrollView {
+                        LazyVGrid(columns: gridItemLayout, spacing: 8) {
+                            // Display the item
+                            ForEach(homeViewModel.nowPlayingMovies, id: \.id) { movie in
+                                MovieMinitureView(with: movie)
+                                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300)
+                                    .padding(.horizontal, 4)
+                            }
+                            Rectangle()
+                                .onAppear(perform: {
+                                    print("llegue al final...")
+                                })
+                        }
+                        .padding(.top, 10)
+                        .padding(.horizontal, 10)
+                        .background(Color("black1"))
+                    }
+                    .padding(.bottom, 139)
+                    .tag(3)
+                    .background(Color("black1"))
                 }
-                
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
 
                 Divider()
 
-                TabBarView(selection: $selection)
+                //Custom tabBar
+                TabBarView(selection: $selection,
+                           fetchMovies: homeViewModel.loadMovies(by:showFirstPage:))
                     .ignoresSafeArea()
             }
             .ignoresSafeArea()
             .navigationBarTitle("Movies", displayMode: .automatic)
-            .blueNavigation
+            .darkNavigation
         })
         .navigationViewStyle(StackNavigationViewStyle())
+        .onAppear(perform: {
+            
+            //This will be excecuted the first time that user open the app
+            if homeViewModel.loadInitialData {
+                homeViewModel.loadMovies(by: .popular)
+            }
+        })
+        .overlay(
+            
+            //Loader
+            ZStack {
+                if homeViewModel.showLoader {
+                    LoaderView(color: Color("algaeGreenOpaque"),
+                               size: 60)
+                }
+            }
+        )
+        .alert(isPresented: $homeViewModel.showAlert) {
+
+            return Alert(title: Text(homeViewModel.titleAlert),
+                            message: Text(homeViewModel.messageAlert),
+                            dismissButton: .default(Text("moviex_accept".localized())))
+        }
     }
 }
 

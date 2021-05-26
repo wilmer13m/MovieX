@@ -12,34 +12,37 @@ struct TabBarView: View {
     @Binding var selection: Int
     @Namespace private var currentTab
     
+    let fetchMovies: ((_ type: MovieType, _ showFirstPage: Bool) -> Void)?
+    
     private let tabs = [Tab(image: "suit.heart.fill", label: "Popular"),
                 Tab(image: "star.circle.fill", label: "Top rating"),
                 Tab(image: "deskclock.fill", label: "Upcoming"),
                 Tab(image: "play.tv.fill", label: "Now playing")]
 
     var body: some View {
+        
         HStack {
+            
             ForEach(tabs.indices) { index in
+                
                 GeometryReader { geometry in
                     VStack(spacing: 4) {
                         if selection == index {
-                            Color(.label)
+                            Color("algaeGreen")
                                 .frame(height: 2)
                                 .offset(y: -8)
                                 .matchedGeometryEffect(id: "currentTab", in: currentTab)
+                                .onAppear {
+                                    //This is used to fetch movies whe user swipe between tabs
+                                    guard let typeMovie = MovieType(rawValue: selection) else { return }
+                                    fetchMovies?(typeMovie, true)
+                                }
                         }
                         
-                        if tabs[selection].label == "popular" && tabs[index].label == "popular" {
-                            Image(systemName: tabs[index].image)
-                                .frame(height: 20)
-                                .rotationEffect(.degrees(25))
-                        
-                        } else {
-                            Image(systemName: tabs[index].image)
-                                .frame(height: 20)
-                                .rotationEffect(.degrees(0))
+                        Image(systemName: tabs[index].image)
+                            .frame(height: 20)
+                            .rotationEffect(.degrees(0))
 
-                        }
                         
                         Text(tabs[index].label)
                             .font(.caption2)
@@ -54,16 +57,22 @@ struct TabBarView: View {
                             selection = index
                         }
                     }
+                    .onAppear {
+                        guard let typeMovie = MovieType(rawValue: selection) else { return }
+                        fetchMovies?(typeMovie, true)
+                    }
                 }
-                .frame(height: 44, alignment: .bottom)
+                .frame(height: 74, alignment: .bottom)
             }
         }
     }
 }
 
 struct TabView_Previews: PreviewProvider {
+    
+    
     static var previews: some View {
-        TabBarView(selection: .constant(0))
+        TabBarView(selection: .constant(0), fetchMovies: nil)
             .previewLayout(.sizeThatFits)
     }
 }

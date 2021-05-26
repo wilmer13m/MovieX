@@ -9,7 +9,7 @@ import UIKit
 
 class NowPlayingMoviesWorker: BaseWorker {
 
-    func getNowPlayingMovies(page: Int, completion: @escaping (Bool, Movie?) -> Void) {
+    func getNowPlayingMovies(page: Int, completion: @escaping (Bool, MoviesResponse?) -> Void) {
         
         let headerConfig = SetupRequestWorker.HeadersContentConfig()
         let popularMoviesURL = backendUrlWorkerObj.getNowPlayingMoviesURL()

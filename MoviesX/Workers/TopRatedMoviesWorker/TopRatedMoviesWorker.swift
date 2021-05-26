@@ -9,7 +9,7 @@ import UIKit
 
 class TopRatedMoviesWorker: BaseWorker {
 
-    func getTopRatedMovies(page: Int, completion: @escaping (Bool, Movie?) -> Void) {
+    func getTopRatedMovies(page: Int, completion: @escaping (Bool, MoviesResponse?) -> Void) {
         
         let headerConfig = SetupRequestWorker.HeadersContentConfig()
         let popularMoviesURL = backendUrlWorkerObj.getTopRatedMoviesURL()

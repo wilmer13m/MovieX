@@ -13,6 +13,9 @@ class BackendURLWorker {
     // MARK: Variable name for the main API URL
     private let apiUrlVariableName = "Api Main URL"
 
+    // MARK: Variable name for the main API URL
+    private let apiImageUrlVariableName = "Api Images URL"
+
     // MARK: Subdomain for login endpoint
     private let loginSubdomain = "login/passenger.json"
     
@@ -87,5 +90,9 @@ class BackendURLWorker {
         return getVariableFromPlist(variableName: apiUrlVariableName) + String(format:
                                                                                 personDetail,
                                                                             "\(personId)")
+    }
+    
+    func getBaseImageUrl() -> String {
+        getVariableFromPlist(variableName: apiImageUrlVariableName)
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 extension View {
     
-    var blueNavigation: some View {
+    var darkNavigation: some View {
         self.navigationBarColor(UIColor(named: "black4") ?? .white, textColor: UIColor.white)
     }
     
