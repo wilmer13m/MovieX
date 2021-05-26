@@ -21,7 +21,7 @@ struct MoviesResponse: Codable {
         case totalResults = "total_results"
     }
     
-    struct Movie: Codable {
+    struct Movie: Codable, Equatable {
         
         var adult: Bool?
         var backdropPath: String?
@@ -48,6 +48,10 @@ struct MoviesResponse: Codable {
             case voteCount = "vote_count"
             case originalTitle = "original_title"
             case releaseDate = "release_date"
+        }
+        
+        static func ==(lhs: Movie, rhs: Movie) -> Bool {
+            return lhs.id == rhs.id
         }
     }
 }

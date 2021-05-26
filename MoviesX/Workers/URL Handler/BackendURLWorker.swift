@@ -2,11 +2,10 @@
 //  BackendURLWorker.swift
 //  Pinkcar&Procar
 //
-//  Created by Javier Susa on 28/09/20.
+//  Created by Wilmer Mendoza on 24/05/21.
 //
 
 import Foundation
-import SwiftUI
 
 class BackendURLWorker {
 

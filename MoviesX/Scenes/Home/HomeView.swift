@@ -12,7 +12,7 @@ struct HomeView: View {
     @State private var selection = 0
     @StateObject private var homeViewModel = HomeViewModel()
     
-    private var gridItemLayout = Array(repeating: GridItem(.flexible(), spacing: 0), count: 2)
+    private let gridItemLayout = Array(repeating: GridItem(.flexible(), spacing: 0), count: 2)
     
     var body: some View {
         
@@ -30,11 +30,12 @@ struct HomeView: View {
                                 MovieMinitureView(with: movie)
                                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300)
                                     .padding(.horizontal, 4)
+                                    .onAppear {
+                                        if homeViewModel.loadMoreMovies(for: .popular, movie: movie) {
+                                            homeViewModel.loadMovies(by: .popular)
+                                        }
+                                    }
                             }
-                            Rectangle()
-                                .onAppear(perform: {
-                                    print("llegue al final...")
-                                })
                         }
                         .padding(.top, 10)
                         .padding(.horizontal, 10)
@@ -52,11 +53,13 @@ struct HomeView: View {
                                 MovieMinitureView(with: movie)
                                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300)
                                     .padding(.horizontal, 4)
+                                    .onAppear {
+                                        if homeViewModel.loadMoreMovies(for: .topRated,
+                                                                        movie: movie) {
+                                            homeViewModel.loadMovies(by: .topRated)
+                                        }
+                                    }
                             }
-                            Rectangle()
-                                .onAppear(perform: {
-                                    print("llegue al final...")
-                                })
                         }
                         .padding(.top, 10)
                         .padding(.horizontal, 10)
@@ -74,11 +77,14 @@ struct HomeView: View {
                                 MovieMinitureView(with: movie)
                                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300)
                                     .padding(.horizontal, 4)
+                                    .onAppear {
+                                        if homeViewModel.loadMoreMovies(for: .upComing,
+                                                                        movie: movie) {
+                                            homeViewModel.loadMovies(by: .upComing)
+                                        }
+                                    }
                             }
-                            Rectangle()
-                                .onAppear(perform: {
-                                    print("llegue al final...")
-                                })
+
                         }
                         .padding(.top, 10)
                         .padding(.horizontal, 10)
@@ -96,11 +102,13 @@ struct HomeView: View {
                                 MovieMinitureView(with: movie)
                                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300)
                                     .padding(.horizontal, 4)
+                                    .onAppear {
+                                        if homeViewModel.loadMoreMovies(for: .nowPlaying,
+                                                                        movie: movie) {
+                                            homeViewModel.loadMovies(by: .nowPlaying)
+                                        }
+                                    }
                             }
-                            Rectangle()
-                                .onAppear(perform: {
-                                    print("llegue al final...")
-                                })
                         }
                         .padding(.top, 10)
                         .padding(.horizontal, 10)

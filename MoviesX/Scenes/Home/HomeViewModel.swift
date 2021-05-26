@@ -107,7 +107,6 @@ class HomeViewModel: ObservableObject {
                             self.topRatedMovies.append(movie)
                         }
                     }
-                   
                     
                 } else {
                     self.setupAlert(title: "moviex_error".localized(), message: "home_alert_no_movies_movies_message".localized())
@@ -180,6 +179,37 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    /// This function check if we need to fetch more movies of a specifec type.
+ 
+    /// - Parameter movieType: The movie type that you want to fetch, this is an enum
+    /// - Parameter movie: the item that we use to compare and decide y we need to fetch more movies
+    /// - Returns: True if we send the last item previously fetched
+
+    func loadMoreMovies(for movieType: MovieType, movie: MoviesResponse.Movie) -> Bool {
+        
+        switch movieType {
+        case .popular:
+            guard let lastMovieInArray = popularMovies.last else {return false}
+            return lastMovieInArray == movie
+        case .topRated:
+            guard let lastMovieInArray = topRatedMovies.last else {return false}
+            return lastMovieInArray == movie
+
+        case .upComing:
+            guard let lastMovieInArray = upcomingMovies.last else {return false}
+            return lastMovieInArray == movie
+
+        case .nowPlaying:
+            guard let lastMovieInArray = nowPlayingMovies.last else {return false}
+            return lastMovieInArray == movie
+        }
+    }
+    
+    /// This function setup the data to use in the alert.
+ 
+    /// - Parameter title: title to display in the alert
+    /// - Parameter movie: message to display in alert
+
     private func setupAlert(title: String, message: String) {
         self.titleAlert = title
         self.messageAlert = message

@@ -2,7 +2,7 @@
 //  SetupRequestWorker.swift
 //  Pinkcar&Procar
 //
-//  Created by Javier Susa on 28/09/20.
+//  Created by Wilmer Mendoza on 24/05/21.
 //
 
 import Foundation
@@ -50,13 +50,9 @@ class SetupRequestWorker {
     func setupGetRequest(sesion: String?,
                          mainUrl: String,
                          selectedHttpMethod: BackendConnection.HttpMethods,
-                         timeoutInterval: Double = 1200.0) -> URLRequest {
-        var headers = [
+                         timeoutInterval: Double = 20.0) -> URLRequest {
+        let headers = [
             "content-type": "application/json"]
-
-        if let languageCode = Locale.current.languageCode {
-            headers["x-language-code"] = languageCode != "en" ? "es" : languageCode
-        }
         
         var request = URLRequest(url: URL(string: mainUrl)!, timeoutInterval: timeoutInterval)
         request.httpMethod = selectedHttpMethod.rawValue
