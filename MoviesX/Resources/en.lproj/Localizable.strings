@@ -16,3 +16,14 @@
 
 //Movie Detail
 "movie_detail_no_available_cast_info" = "There is not available info about the cast movie";
+"movie_detail_summary" = "Summary";
+"movie_detail_rate" = "Rate";
+"movie_detail_cast" = "Cast";
+
+//Profile
+"profile_info" = "Information";
+"profile_name" = "Name";
+"profile_birthday" = "Birthday";
+"profile_place_birthday" = "Place birthday";
+"profile_popularity" = "Popularity";
+"profile_biography" = "Biography";

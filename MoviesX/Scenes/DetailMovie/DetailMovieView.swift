@@ -32,12 +32,14 @@ struct DetailMovieView: View {
                                 .aspectRatio(contentMode: .fit)
                                 .clipped()
                                 .frame(width: 130, height: 180)
+                            
                         }
                         .resizable()
                         .clipped()
                         .frame(width: geometryReader.size.width, height: geometryReader.size.height * 0.25)
                         .aspectRatio(contentMode: .fit)
                         .foregroundColor(Color("brown1"))
+                        
                     
                     VStack {
                             
@@ -53,7 +55,7 @@ struct DetailMovieView: View {
                                     VStack(alignment: .leading, spacing: 19) {
                                         
                                         VStack(alignment: .leading, spacing: 12) {
-                                            Text("Summary")
+                                            Text("movie_detail_summary".localized())
                                                 .font(Font.system(size: 18, weight: .bold))
                                                 .foregroundColor(Color("algaeGreen"))
                                             
@@ -67,10 +69,11 @@ struct DetailMovieView: View {
                                             Text(movie.overview ?? "N/A")
                                                 .font(Font.system(size: 12))
                                                 .foregroundColor(.white)
+                                                .padding(.trailing, 12)
 
                                             VStack(alignment: .leading, spacing: 6, content: {
                                                 
-                                                Text("Rate")
+                                                Text("movie_detail_rate".localized())
                                                     .font(Font.system(size: 12, weight: .bold))
                                                     .foregroundColor(.white)
 
@@ -89,7 +92,7 @@ struct DetailMovieView: View {
                                 
                                     //Seccion 3
                                     VStack(alignment: .leading, spacing: 29) {
-                                        Text("Cast")
+                                        Text("movie_detail_cast".localized())
                                             .font(Font.system(size: 18, weight: .bold))
                                             .foregroundColor(Color("algaeGreen"))
                                         
@@ -100,7 +103,7 @@ struct DetailMovieView: View {
                                                     
                                                     ForEach(movieDetailViewModel.casting, id: \.id) { casting in
                                                         NavigationLink(
-                                                            destination: Text("Destination"),
+                                                            destination: ProfileView(profileId: casting.id ?? 0),
                                                             label: {
                                                                 
                                                                 VStack {

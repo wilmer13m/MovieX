@@ -18,11 +18,11 @@ struct PersonDetail: Codable {
     var gender: Int?
     var biography: String?
     var popularity: Double?
-    var place_of_birth: String?
     var placeOfBirth: String?
     var adult: Bool?
     var imdbId: String?
     var homepage: String?
+    var profilePath: String?
     
     private enum CodingKeys: String, CodingKey {
         case birthday, deathday, id, name, gender, biography, popularity, adult, homepage
@@ -30,5 +30,6 @@ struct PersonDetail: Codable {
         case alsoKnownAs = "also_known_as"
         case placeOfBirth = "place_of_birth"
         case imdbId = "imdb_id"
+        case profilePath = "profile_path"
     }
 }

@@ -13,6 +13,7 @@ class MovieDetailViewModel: ObservableObject {
     
     var titleAlert = ""
     var messageAlert = ""
+    var fetchCastingMovie = true
     
     @Published var casting = [CastMovieResponse.Cast]()
     @Published var showAlert = false
@@ -20,25 +21,28 @@ class MovieDetailViewModel: ObservableObject {
     
     func getMovieCasting(movieId: Int) {
         
-        showLoader = true
-        
-        castingWorker.getMovieCasting(movieId: movieId) { [weak self] (success, response) in
-           
-            guard let self = self else {return}
+        if fetchCastingMovie {
+            showLoader = true
             
-            self.showLoader = false
-            
-            if success {
+            castingWorker.getMovieCasting(movieId: movieId) { [weak self] (success, response) in
+               
+                guard let self = self else {return}
                 
-                guard let cast = response?.cast, !cast.isEmpty else {
-                    self.setupAlert(title: "moviex_error".localized(), message: "movie_detail_no_available_cast_info".localized())
-                    return
+                self.showLoader = false
+                
+                if success {
+                    
+                    guard let cast = response?.cast, !cast.isEmpty else {
+                        self.setupAlert(title: "moviex_error".localized(), message: "movie_detail_no_available_cast_info".localized())
+                        return
+                    }
+                    
+                    self.fetchCastingMovie = false
+                    self.casting = cast
+                    
+                } else {
+                    self.setupAlert(title: "moviex_error".localized(), message: "movie_failed_connection".localized())
                 }
-                
-                self.casting = cast
-                
-            } else {
-                self.setupAlert(title: "moviex_error".localized(), message: "movie_failed_connection".localized())
             }
         }
     }

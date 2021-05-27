@@ -17,3 +17,14 @@
 
 //Movie Detail
 "movie_detail_no_available_cast_info" = "No hay información disponible sobre el elenco de la pelicula";
+"movie_detail_summary" = "Resumen";
+"movie_detail_rate" = "Calificación";
+"movie_detail_cast" = "Elenco";
+
+//Profile
+"profile_info" = "Información";
+"profile_name" = "Nombre";
+"profile_birthday" = "Fecha de nacimiento";
+"profile_place_birthday" = "Lugar de nacimiento";
+"profile_popularity" = "Popularidad";
+"profile_biography" = "Biografia";
