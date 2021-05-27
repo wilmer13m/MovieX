@@ -9,6 +9,10 @@
 //Generic Messages
 "moviex_error" = "Error";
 "moviex_accept" = "Accept";
+"movie_failed_connection" = "An error ocurred. Please try again later.";
 
 //Home
 "home_alert_no_movies_movies_message" = "No movies available, please try again later.";
+
+//Movie Detail
+"movie_detail_no_available_cast_info" = "There is not available info about the cast movie";

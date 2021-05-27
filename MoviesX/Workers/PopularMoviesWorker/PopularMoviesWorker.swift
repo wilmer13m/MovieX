@@ -7,7 +7,10 @@
 
 import UIKit
 
-class PopularMoviesWorker: BaseWorker {
+protocol FetchPopularMoviesProtocol {
+    func getPopularMovies(page: Int, completion: @escaping (Bool, MoviesResponse?) -> Void)
+}
+class PopularMoviesWorker: BaseWorker, FetchPopularMoviesProtocol {
    
     func getPopularMovies(page: Int, completion: @escaping (Bool, MoviesResponse?) -> Void) {
         

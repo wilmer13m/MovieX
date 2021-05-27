@@ -39,7 +39,10 @@ class BackendURLWorker {
     // MARK: Subdomain for people detail endpoint
     private let personDetail = "3/person/%@"
 
+    // MARK: Subdomain for movie casting
+    private let casting = "3/movie/%@/credits"
 
+    
     //MARK: get API URL
     private func getVariableFromPlist(variableName: String) -> String {
         return ((Bundle.main.infoDictionary?[variableName] as? String)?.replacingOccurrences(of: "\\", with: ""))!
@@ -93,5 +96,12 @@ class BackendURLWorker {
     
     func getBaseImageUrl() -> String {
         getVariableFromPlist(variableName: apiImageUrlVariableName)
+    }
+    
+    // MARK: Gets the full endpoint for movie casting
+    func getPersonMovieCastingURL(movieId: String) -> String {
+        return getVariableFromPlist(variableName: apiUrlVariableName) + String(format:
+                                                                                casting,
+                                                                            "\(movieId)")
     }
 }

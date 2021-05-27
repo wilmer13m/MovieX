@@ -9,7 +9,11 @@
 //Generic Messages
 "moviex_error" = "Error";
 "moviex_accept" = "Aceptar";
+"movie_failed_connection" = "Ha ocurrido un error por favor intente de nuevo más tarde.";
 
 
 //HOME
 "home_alert_no_movies_movies_message" = "No hay películas disponibles. Intente de nuevo más tarde";
+
+//Movie Detail
+"movie_detail_no_available_cast_info" = "No hay información disponible sobre el elenco de la pelicula";

@@ -10,7 +10,7 @@ import Foundation
 
 class HomeViewModel: ObservableObject {
     
-    private let popularWorker = PopularMoviesWorker()
+    let popularWorker: FetchPopularMoviesProtocol
     private let topRatedWorker = TopRatedMoviesWorker()
     private let upComingWorker = UpcomingWorker()
     private let nowPlayingWorker = NowPlayingMoviesWorker()
@@ -32,6 +32,9 @@ class HomeViewModel: ObservableObject {
     @Published var loadInitialData = true
     @Published var selection = 0
     
+    init(popularWorker: FetchPopularMoviesProtocol = PopularMoviesWorker()) {
+        self.popularWorker = popularWorker
+    }
     /// This function fetch a movie array for a given `MovieType`.
  
     /// - Warning: This could return a nil array or an empty array
