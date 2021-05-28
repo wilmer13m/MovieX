@@ -82,7 +82,7 @@ struct DetailMovieView: View {
                                                         .frame(width: 50, height: 50)
                                                         .foregroundColor(Color("algaeGreen"))
                                                 
-                                                    Text("7.0")
+                                                    Text("\(String(format: "%.1f", movie.voteAverage ?? 0.0))")
                                                         .font(Font.system(size: 18, weight: .bold))
                                                         .foregroundColor(Color.white)
                                                 }

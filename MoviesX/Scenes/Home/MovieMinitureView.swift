@@ -70,7 +70,7 @@ struct MovieMinitureView: View {
                                         .foregroundColor(Color("algaeGreen"))
                                         .frame(width: 8, height: 9)
                                     
-                                    Text("\(movie.voteAverage ?? 0.0)")
+                                    Text("\(String(format: "%.2f", movie.voteAverage ?? 0.0))")
                                         .font(.system(size: 10, weight: .semibold, design: .default))
                                         .foregroundColor(Color("algaeGreen"))
                                 }

@@ -83,7 +83,7 @@ struct ProfileView: View {
                                                 .font(Font.system(size: 17, weight: .bold))
                                                 .foregroundColor(.white)
                                             
-                                            Text("\(profileViewModel.personDetail?.popularity ?? 0.0)")
+                                            Text("\(String(format: "%.2f", profileViewModel.personDetail?.popularity ?? 0.0))")
                                                 .font(Font.system(size: 17))
                                                 .foregroundColor(.white)
                                         }
