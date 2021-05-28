@@ -54,6 +54,7 @@
 		A5ED0E4D26609A5500761C94 /* MockUpcomingMoviesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ED0E4C26609A5500761C94 /* MockUpcomingMoviesWorker.swift */; };
 		A5ED0E5526609F5C00761C94 /* MockNowPlayingMoviesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ED0E5426609F5C00761C94 /* MockNowPlayingMoviesWorker.swift */; };
 		A5ED0E5B2660A7F600761C94 /* MovieDetailTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ED0E5A2660A7F600761C94 /* MovieDetailTest.swift */; };
+		A5ED0E662660A9A300761C94 /* MockCastingWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ED0E652660A9A300761C94 /* MockCastingWorker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +130,7 @@
 		A5ED0E4C26609A5500761C94 /* MockUpcomingMoviesWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUpcomingMoviesWorker.swift; sourceTree = "<group>"; };
 		A5ED0E5426609F5C00761C94 /* MockNowPlayingMoviesWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNowPlayingMoviesWorker.swift; sourceTree = "<group>"; };
 		A5ED0E5A2660A7F600761C94 /* MovieDetailTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailTest.swift; sourceTree = "<group>"; };
+		A5ED0E652660A9A300761C94 /* MockCastingWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCastingWorker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -368,8 +370,8 @@
 		A56BF7AD265C70FE0085CD29 /* MoviesXTests */ = {
 			isa = PBXGroup;
 			children = (
-				A5ED0E592660A7B200761C94 /* DetailMovie */,
 				A5ED0E4226608FD700761C94 /* Home */,
+				A5ED0E592660A7B200761C94 /* DetailMovie */,
 				A56BF7AE265C70FE0085CD29 /* MoviesXTests.swift */,
 				A56BF7B0265C70FE0085CD29 /* Info.plist */,
 			);
@@ -453,6 +455,7 @@
 			isa = PBXGroup;
 			children = (
 				A5ED0E5A2660A7F600761C94 /* MovieDetailTest.swift */,
+				A5ED0E652660A9A300761C94 /* MockCastingWorker.swift */,
 			);
 			path = DetailMovie;
 			sourceTree = "<group>";
@@ -643,6 +646,7 @@
 				A5D87FE9265F403200CC70B4 /* HomeViewModelTest.swift in Sources */,
 				A5ED0E5526609F5C00761C94 /* MockNowPlayingMoviesWorker.swift in Sources */,
 				A5ED0E3E26608F2B00761C94 /* MockTopRatedMoviesWorker.swift in Sources */,
+				A5ED0E662660A9A300761C94 /* MockCastingWorker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

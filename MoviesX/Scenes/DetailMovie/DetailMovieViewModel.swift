@@ -9,7 +9,7 @@ import Combine
 
 class MovieDetailViewModel: ObservableObject {
     
-    private let castingWorker = CastingWorker()
+    let castingWorker: FetchCastingMoviesProtocol
     
     var titleAlert = ""
     var messageAlert = ""
@@ -18,6 +18,10 @@ class MovieDetailViewModel: ObservableObject {
     @Published var casting = [CastMovieResponse.Cast]()
     @Published var showAlert = false
     @Published var showLoader = true
+    
+    init(castingWorker: FetchCastingMoviesProtocol = CastingWorker()) {
+        self.castingWorker = castingWorker
+    }
     
     func getMovieCasting(movieId: Int) {
         

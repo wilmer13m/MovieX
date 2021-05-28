@@ -6,27 +6,59 @@
 //
 
 import XCTest
+@testable import MoviesX
 
 class MovieDetailTest: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    var movieDetailViewModel: MovieDetailViewModel!
+    var mockCastingWorker: MockCastingWorker!
+    
+    override func setUp() {
+        super.setUp()
+
+        mockCastingWorker = MockCastingWorker()
+        movieDetailViewModel = MovieDetailViewModel(castingWorker: mockCastingWorker)
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    override func tearDown() {
+        
+        super.tearDown()
+        mockCastingWorker = nil
+        movieDetailViewModel = nil
+    }
+    
+    //Here we test if the cast array is empty after failed fetch
+    func testPopularMoviesArrayEmpty() {
+        
+        mockCastingWorker.successFetch = false
+        movieDetailViewModel?.getMovieCasting(movieId: 1)
+        XCTAssertTrue(movieDetailViewModel?.casting.count == 0)
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    //Here we test if we show the alert after fetch failed
+    func testShowAlertAfterFetchFail() {
+        
+        mockCastingWorker.successFetch = false
+        movieDetailViewModel?.getMovieCasting(movieId: 1)
+        
+        XCTAssertTrue(movieDetailViewModel?.showAlert == true)
     }
+    
+    //Here we test if we set the movies fetched into the cast array
+    func testPopularMoviesArrayAfterFetching() {
+        
+        mockCastingWorker.successFetch = true
+        movieDetailViewModel?.getMovieCasting(movieId: 1)
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+        XCTAssertTrue(movieDetailViewModel?.casting.count == 2)
     }
+    
+    //Here we test if we set the movies fetched into the cast movies array
+    func testPopularMoviesArray() {
+        
+        mockCastingWorker.successFetch = true
+        movieDetailViewModel?.getMovieCasting(movieId: 1)
 
+        XCTAssertEqual(movieDetailViewModel?.casting, castMovieResponseMock.cast)
+    }
 }

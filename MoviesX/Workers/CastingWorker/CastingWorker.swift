@@ -5,9 +5,12 @@
 //  Created by Wilmer Mendoza on 27/5/21.
 //
 
-import UIKit
+import Foundation
 
-class CastingWorker: BaseWorker {
+protocol FetchCastingMoviesProtocol {
+    func getMovieCasting(movieId: Int, completion: @escaping (Bool, CastMovieResponse?) -> Void)
+}
+class CastingWorker: BaseWorker, FetchCastingMoviesProtocol {
 
     func getMovieCasting(movieId: Int, completion: @escaping (Bool, CastMovieResponse?) -> Void) {
         

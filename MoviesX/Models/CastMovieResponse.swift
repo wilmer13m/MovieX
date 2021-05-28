@@ -12,7 +12,7 @@ struct CastMovieResponse: Codable {
     var cast: [CastMovieResponse.Cast]?
     var crew: [CastMovieResponse.Crew]?
     
-    struct Cast: Codable {
+    struct Cast: Codable, Equatable {
         var adult: Bool?
         var gender: Int?
         var id: Int?
@@ -31,6 +31,10 @@ struct CastMovieResponse: Codable {
             case profilePath = "profile_path"
             case castId = "cast_id"
             case creditId = "credit_id"
+        }
+        
+        static func ==(lhs: Cast, rhs: Cast) -> Bool {
+            return lhs.id == rhs.id
         }
     }
     
