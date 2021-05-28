@@ -5,11 +5,11 @@
 //  Created by Wilmer Mendoza on 27/5/21.
 //
 
-import UIKit
+import Combine
 
 class ProfileViewModel: ObservableObject {
     
-    private let personDetailWorker = PersonDetailWorker()
+    private let personDetailWorker: FetchPersonDetailProtocol
     
     let titleAlert = "moviex_error".localized()
     let messageAlert = "movie_failed_connection".localized()
@@ -18,6 +18,13 @@ class ProfileViewModel: ObservableObject {
     @Published var showAlert = false
     @Published var showLoader = true
 
+    init(personDetailWorker: FetchPersonDetailProtocol = PersonDetailWorker()) {
+        self.personDetailWorker = personDetailWorker
+    }
+    
+    /// This function fetch a person detail for a given `personId`.
+ 
+    /// - Parameter personId: the id of the person that you want to looking for
     func getProfileDetail(personId: Int) {
         
         showLoader = true

@@ -5,7 +5,7 @@
 //  Created by Wilmer Mendoza on 24/5/21.
 //
 
-import UIKit
+import Foundation
 
 class MovieCreditsWorker: BaseWorker {
 

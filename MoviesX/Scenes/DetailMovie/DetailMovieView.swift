@@ -51,7 +51,7 @@ struct DetailMovieView: View {
                                 
                                 VStack(alignment: .leading, spacing: 35) {
                                     
-                                    //Seccion 1
+                                    //Seccion 1 SUMMARY
                                     VStack(alignment: .leading, spacing: 19) {
                                         
                                         VStack(alignment: .leading, spacing: 12) {
@@ -90,7 +90,7 @@ struct DetailMovieView: View {
                                         }
                                     }
                                 
-                                    //Seccion 3
+                                    //Seccion 2 CASTING
                                     VStack(alignment: .leading, spacing: 29) {
                                         Text("movie_detail_cast".localized())
                                             .font(Font.system(size: 18, weight: .bold))
@@ -135,6 +135,51 @@ struct DetailMovieView: View {
                                         .padding(.trailing, 12)
                                         .padding(.leading, -23)
                                     }
+                                    
+                                    //Seccion 3 IMAGES
+                                    VStack(alignment: .leading, spacing: 29) {
+                                        Text("movie_detail_images".localized())
+                                            .font(Font.system(size: 18, weight: .bold))
+                                            .foregroundColor(Color("algaeGreen"))
+                                        
+                                        ScrollView(.horizontal, showsIndicators: true, content: {
+                                            
+                                            VStack(alignment: .leading) {
+                                                HStack(spacing: 21) {
+                                                    
+                                                    if !movieDetailViewModel.images.isEmpty {
+                                                        ForEach(movieDetailViewModel.images, id: \.id) { image in
+                                                            
+                                                            KFImage(URL(string: "\(baseImageUrl)\(image.filePath ?? "")"))
+                                                                .placeholder {
+                                                                    Image(systemName: "photo.fill")
+                                                                        .resizable()
+                                                                        .aspectRatio(contentMode: .fit)
+                                                                        .clipped()
+                                                                        .frame(width: 120, height: 120)
+
+                                                                }
+                                                                .resizable()
+                                                                .clipped()
+                                                                .frame(width: 120, height: 120)
+                                                                .aspectRatio(contentMode: .fill)
+                                                                .cornerRadius(60)
+                                                                .foregroundColor(Color("brown1"))
+                                                        }
+
+                                                    } else {
+                                                        Text("movie_detail_no_images".localized())
+                                                            .font(Font.system(size: 18, weight: .bold))
+                                                            .foregroundColor(.white)
+                                                            .padding(.leading)
+                                                    }
+                                                }
+                                            }
+                                        })
+                                        .padding(.trailing, 12)
+                                        .padding(.leading, -23)
+                                    }
+
                                 }
                                 Spacer()
                                                                 

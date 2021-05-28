@@ -10,10 +10,10 @@ import Foundation
 
 class HomeViewModel: ObservableObject {
     
-    let popularWorker: FetchPopularMoviesProtocol
-    let topRatedWorker: FetchTopRatedMoviesProtocol
-    let upComingWorker: FetchUpcomingMoviesProtocol
-    let nowPlayingWorker: FetchNowPlayingMoviesProtocol
+    private let popularWorker: FetchPopularMoviesProtocol
+    private let topRatedWorker: FetchTopRatedMoviesProtocol
+    private let upComingWorker: FetchUpcomingMoviesProtocol
+    private let nowPlayingWorker: FetchNowPlayingMoviesProtocol
 
     var titleAlert = ""
     var messageAlert = ""
@@ -43,6 +43,7 @@ class HomeViewModel: ObservableObject {
         self.nowPlayingWorker = nowPlayingWorker
         
     }
+    
     /// This function fetch a movie array for a given `MovieType`.
  
     /// - Warning: This could return a nil array or an empty array
@@ -82,10 +83,8 @@ class HomeViewModel: ObservableObject {
                         return
                     }
                     
-//                    DispatchQueue.main.async {
                         movies.forEach { (movie) in
                             self.popularMovies.append(movie)
-//                        }
                     }
                 } else {
                     self.setupAlert(title: "moviex_error".localized(), message: "home_alert_no_movies_movies_message".localized())
@@ -113,11 +112,9 @@ class HomeViewModel: ObservableObject {
                         return
                     }
                     
-                 //   DispatchQueue.main.async {
                         movies.forEach { (movie) in
                             self.topRatedMovies.append(movie)
                         }
-//                    }
                     
                 } else {
                     self.setupAlert(title: "moviex_error".localized(), message: "home_alert_no_movies_movies_message".localized())
@@ -145,11 +142,10 @@ class HomeViewModel: ObservableObject {
                         return
                     }
                     
-//                    DispatchQueue.main.async {
                         movies.forEach { (movie) in
                             self.upcomingMovies.append(movie)
                         }
-//                    }
+                    
                 } else {
                     self.setupAlert(title: "moviex_error".localized(), message: "home_alert_no_movies_movies_message".localized())
                 }
@@ -177,11 +173,9 @@ class HomeViewModel: ObservableObject {
                         return
                     }
                     
-//                    DispatchQueue.main.async {
                         movies.forEach { (movie) in
                             self.nowPlayingMovies.append(movie)
                         }
-//                    }
                     
                 } else {
                     self.setupAlert(title: "moviex_error".localized(), message: "home_alert_no_movies_movies_message".localized())

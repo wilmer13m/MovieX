@@ -5,7 +5,7 @@
 //  Created by Wilmer Mendoza on 24/5/21.
 //
 
-import UIKit
+import Foundation
 
 protocol FetchNowPlayingMoviesProtocol: class {
     func getNowPlayingMovies(page: Int, completion: @escaping (Bool, MoviesResponse?) -> Void)

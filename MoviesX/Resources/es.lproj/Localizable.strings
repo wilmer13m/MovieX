@@ -20,6 +20,8 @@
 "movie_detail_summary" = "Resumen";
 "movie_detail_rate" = "Calificación";
 "movie_detail_cast" = "Elenco";
+"movie_detail_images" = "Imagenes";
+"movie_detail_no_images" = "No hay imagenes disponibles";
 
 //Profile
 "profile_info" = "Información";

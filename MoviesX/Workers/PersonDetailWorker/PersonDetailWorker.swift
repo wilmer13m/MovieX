@@ -5,9 +5,13 @@
 //  Created by Wilmer Mendoza on 24/5/21.
 //
 
-import UIKit
+import Foundation
 
-class PersonDetailWorker: BaseWorker {
+protocol FetchPersonDetailProtocol {
+    func getPersonDetail(personId: Int, completion: @escaping (Bool, PersonDetail?) -> Void)
+}
+
+class PersonDetailWorker: BaseWorker, FetchPersonDetailProtocol {
 
     func getPersonDetail(personId: Int, completion: @escaping (Bool, PersonDetail?) -> Void) {
         

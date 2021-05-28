@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieCredits: Codable {
+struct MovieCredits: Codable {
     var id: Int?
     var cast: [MovieCredits.Cast]?
     var crew: [MovieCredits.Crew]?

@@ -41,7 +41,9 @@ class BackendURLWorker {
 
     // MARK: Subdomain for movie casting
     private let casting = "3/movie/%@/credits"
-
+    
+    // MARK: Subdomain for get images from movie
+    private let imagesFromMovie = "3/movie/%@/images"
     
     //MARK: get API URL
     private func getVariableFromPlist(variableName: String) -> String {
@@ -102,6 +104,13 @@ class BackendURLWorker {
     func getPersonMovieCastingURL(movieId: String) -> String {
         return getVariableFromPlist(variableName: apiUrlVariableName) + String(format:
                                                                                 casting,
+                                                                            "\(movieId)")
+    }
+    
+    // MARK: Gets the full endpoint for movie casting
+    func getImagesFromMovieURL(movieId: String) -> String {
+        return getVariableFromPlist(variableName: apiUrlVariableName) + String(format:
+                                                                                imagesFromMovie,
                                                                             "\(movieId)")
     }
 }

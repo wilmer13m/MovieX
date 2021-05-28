@@ -19,6 +19,8 @@
 "movie_detail_summary" = "Summary";
 "movie_detail_rate" = "Rate";
 "movie_detail_cast" = "Cast";
+"movie_detail_images" = "Images";
+"movie_detail_no_images" = "No images available";
 
 //Profile
 "profile_info" = "Information";

@@ -1,25 +1,29 @@
 //
-//  ImageWorker.swift
+//  ImagesWorker.swift
 //  MoviesX
 //
-//  Created by Wilmer Mendoza on 24/5/21.
+//  Created by Wilmer Mendoza on 28/5/21.
 //
 
 import Foundation
 
-class MovieImageWorker: BaseWorker {
+protocol FetchImagesWorkerProtocol {
+    func getImagesFromMovie(movieId: Int, completion: @escaping (Bool, ImagesMovieResponse?) -> Void)
+}
 
-    func getMovieImages(movieId: Int, completion: @escaping (Bool, MovieImages?) -> Void) {
+class ImagesWorker: BaseWorker, FetchImagesWorkerProtocol {
+    
+    func getImagesFromMovie(movieId: Int, completion: @escaping (Bool, ImagesMovieResponse?) -> Void) {
         
         let headerConfig = SetupRequestWorker.HeadersContentConfig()
-        let popularMoviesURL = backendUrlWorkerObj.getMovieImagesURL(movieId: "\(movieId)")
+        let personDetailURL = backendUrlWorkerObj.getImagesFromMovieURL(movieId: "\(movieId)")
                 
         let queryParameters = [URLQueryItem(name: "api_key", value: apiKey),
                                URLQueryItem(name: "language", value: "en-US")]
 
         let request = self.setupRequestWorkerObj.setupUrlQueryRequest(headerConfig: headerConfig,
                                                                       queryParameters: queryParameters,
-                                                                      mainUrl: popularMoviesURL, selectedHttpMethod: .GET)
+                                                                      mainUrl: personDetailURL, selectedHttpMethod: .GET)
         
         session.dataTask(with: request, completionHandler: { data, response, error -> Void in
             self.responseCompletion(response, data, error, completion: completion)
