@@ -11,9 +11,9 @@ import Foundation
 class HomeViewModel: ObservableObject {
     
     let popularWorker: FetchPopularMoviesProtocol
-    private let topRatedWorker = TopRatedMoviesWorker()
-    private let upComingWorker = UpcomingWorker()
-    private let nowPlayingWorker = NowPlayingMoviesWorker()
+    let topRatedWorker: FetchTopRatedMoviesProtocol
+    let upComingWorker: FetchUpcomingMoviesProtocol
+    let nowPlayingWorker: FetchNowPlayingMoviesProtocol
 
     var titleAlert = ""
     var messageAlert = ""
@@ -32,8 +32,16 @@ class HomeViewModel: ObservableObject {
     @Published var loadInitialData = true
     @Published var selection = 0
     
-    init(popularWorker: FetchPopularMoviesProtocol = PopularMoviesWorker()) {
+    init(popularWorker: FetchPopularMoviesProtocol = PopularMoviesWorker(),
+         topRatedWorker: FetchTopRatedMoviesProtocol = TopRatedMoviesWorker(),
+         upComingWorker: FetchUpcomingMoviesProtocol = UpcomingWorker(),
+         nowPlayingWorker: FetchNowPlayingMoviesProtocol = NowPlayingMoviesWorker()) {
+        
         self.popularWorker = popularWorker
+        self.topRatedWorker = topRatedWorker
+        self.upComingWorker = upComingWorker
+        self.nowPlayingWorker = nowPlayingWorker
+        
     }
     /// This function fetch a movie array for a given `MovieType`.
  
@@ -74,10 +82,10 @@ class HomeViewModel: ObservableObject {
                         return
                     }
                     
-                    DispatchQueue.main.async {
+//                    DispatchQueue.main.async {
                         movies.forEach { (movie) in
                             self.popularMovies.append(movie)
-                        }
+//                        }
                     }
                 } else {
                     self.setupAlert(title: "moviex_error".localized(), message: "home_alert_no_movies_movies_message".localized())
@@ -105,11 +113,11 @@ class HomeViewModel: ObservableObject {
                         return
                     }
                     
-                    DispatchQueue.main.async {
+                 //   DispatchQueue.main.async {
                         movies.forEach { (movie) in
                             self.topRatedMovies.append(movie)
                         }
-                    }
+//                    }
                     
                 } else {
                     self.setupAlert(title: "moviex_error".localized(), message: "home_alert_no_movies_movies_message".localized())
@@ -137,11 +145,11 @@ class HomeViewModel: ObservableObject {
                         return
                     }
                     
-                    DispatchQueue.main.async {
+//                    DispatchQueue.main.async {
                         movies.forEach { (movie) in
                             self.upcomingMovies.append(movie)
                         }
-                    }
+//                    }
                 } else {
                     self.setupAlert(title: "moviex_error".localized(), message: "home_alert_no_movies_movies_message".localized())
                 }
@@ -157,7 +165,7 @@ class HomeViewModel: ObservableObject {
                 pageNowplaying += 1
             }
 
-            nowPlayingWorker.getNowPlayingMovies(page: pageNowplaying) { [weak self] (success, moviesInfo) in
+            self.nowPlayingWorker.getNowPlayingMovies(page: pageNowplaying) { [weak self] (success, moviesInfo) in
                 
                 guard let self = self else {return}
                 self.showLoader = false
@@ -169,11 +177,11 @@ class HomeViewModel: ObservableObject {
                         return
                     }
                     
-                    DispatchQueue.main.async {
+//                    DispatchQueue.main.async {
                         movies.forEach { (movie) in
                             self.nowPlayingMovies.append(movie)
                         }
-                    }
+//                    }
                     
                 } else {
                     self.setupAlert(title: "moviex_error".localized(), message: "home_alert_no_movies_movies_message".localized())

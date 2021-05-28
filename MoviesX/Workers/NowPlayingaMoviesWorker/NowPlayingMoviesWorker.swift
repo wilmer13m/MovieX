@@ -7,7 +7,11 @@
 
 import UIKit
 
-class NowPlayingMoviesWorker: BaseWorker {
+protocol FetchNowPlayingMoviesProtocol: class {
+    func getNowPlayingMovies(page: Int, completion: @escaping (Bool, MoviesResponse?) -> Void)
+}
+
+class NowPlayingMoviesWorker: BaseWorker, FetchNowPlayingMoviesProtocol {
 
     func getNowPlayingMovies(page: Int, completion: @escaping (Bool, MoviesResponse?) -> Void) {
         

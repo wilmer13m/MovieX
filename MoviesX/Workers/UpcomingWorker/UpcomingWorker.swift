@@ -5,9 +5,13 @@
 //  Created by Wilmer Mendoza on 24/5/21.
 //
 
-import UIKit
+import Foundation
 
-class UpcomingWorker: BaseWorker {
+protocol FetchUpcomingMoviesProtocol {
+    func getUpcomingMovies(page: Int, completion: @escaping (Bool, MoviesResponse?) -> Void)
+}
+
+class UpcomingWorker: BaseWorker, FetchUpcomingMoviesProtocol {
 
     func getUpcomingMovies(page: Int, completion: @escaping (Bool, MoviesResponse?) -> Void) {
         
